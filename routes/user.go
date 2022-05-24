@@ -26,7 +26,7 @@ func CreateUser(c echo.Context) error {
 		return bindErr
 	}
 
-	println(user.ID)
+	//println(user.ID)
 	var db, _ = c.Get("db").(*gorm.DB)
 
 	db.Create(&user)
