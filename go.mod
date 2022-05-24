@@ -3,7 +3,9 @@ module awesomeProject
 go 1.18
 
 require (
+	github.com/google/uuid v1.3.0
 	github.com/labstack/echo/v4 v4.7.2
+	github.com/lib/pq v1.10.6
 	gorm.io/driver/sqlite v1.3.2
 	gorm.io/gorm v1.23.5
 )

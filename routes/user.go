@@ -8,10 +8,11 @@ import (
 )
 
 func ReadUser(c echo.Context) error {
-	var id = c.QueryParam("id")
+	var id = c.QueryParam("ID")
 	var db, _ = c.Get("db").(*gorm.DB)
+
 	var user models.User
-	db.Table("user").Where("ID = ?", id).First(&user)
+	db.Where("ID = ?", id).First(&user)
 
 	return c.JSON(http.StatusOK, user)
 }
@@ -25,13 +26,10 @@ func CreateUser(c echo.Context) error {
 		return bindErr
 	}
 
-	println(user.Username)
+	println(user.ID)
 	var db, _ = c.Get("db").(*gorm.DB)
-	db.Create(&models.User{
-		Model:    gorm.Model{},
-		Username: user.Username,
-		Password: user.Password,
-	})
+
+	db.Create(&user)
 
 	return c.JSON(http.StatusOK, user)
 }

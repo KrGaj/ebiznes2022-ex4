@@ -1,10 +1,12 @@
 package models
 
-import "gorm.io/gorm"
-
 type User struct {
-	gorm.Model
+	Base
 
 	Username string
 	Password string
 }
+
+//func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
+//	u.ID =
+//}

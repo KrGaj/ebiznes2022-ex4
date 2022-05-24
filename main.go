@@ -17,7 +17,7 @@ func main() {
 		return c.String(http.StatusOK, "Hello world!")
 	})
 
-	e.GET("/users:id", routes.ReadUser)
+	e.GET("/users", routes.ReadUser)
 	e.POST("/users", routes.CreateUser)
 
 	e.Start(":2137")
