@@ -1,1 +1,37 @@
 package routes
+
+import (
+	"awesomeProject/database/models"
+	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
+	"net/http"
+)
+
+func ReadUser(c echo.Context) error {
+	var id = c.QueryParam("id")
+	var db, _ = c.Get("db").(*gorm.DB)
+	var user models.User
+	db.Table("user").Where("ID = ?", id).First(&user)
+
+	return c.JSON(http.StatusOK, user)
+}
+
+func CreateUser(c echo.Context) error {
+	var user models.User
+	var bindErr = c.Bind(&user)
+
+	if bindErr != nil {
+		println(bindErr)
+		return bindErr
+	}
+
+	println(user.Username)
+	var db, _ = c.Get("db").(*gorm.DB)
+	db.Create(&models.User{
+		Model:    gorm.Model{},
+		Username: user.Username,
+		Password: user.Password,
+	})
+
+	return c.JSON(http.StatusOK, user)
+}
